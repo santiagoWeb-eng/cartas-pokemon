@@ -1,12 +1,94 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Cartas Pokémon</title>
-    <script type="module" src="/main.jsx" defer></script>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cartas Pokémon</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #fef3c7;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #dc2626;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      max-width: 1000px;
+      margin: 30px auto 0;
+    }
+    .card {
+      background-color: white;
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    .card img {
+      height: 200px;
+      object-fit: contain;
+      margin-bottom: 10px;
+    }
+    .price {
+      color: green;
+      font-weight: bold;
+    }
+    .btn {
+      background-color: #dc2626;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <h1>Pokémon Card Store</h1>
+  <div class="grid" id="store"></div>
+
+  <script>
+    const products = [
+      {
+        id: 1,
+        name: "Charizard Base Set 1st Edition",
+        price: "$3,000",
+        image: "https://images.pokemontcg.io/base1/4.png",
+        link: "https://cartaspokemon.pe/productos/charizard-base-set-1st-edition"
+      },
+      {
+        id: 2,
+        name: "Blastoise Base Set",
+        price: "$1,200",
+        image: "https://images.pokemontcg.io/base1/2.png",
+        link: "https://cartaspokemon.pe/productos/blastoise-base-set"
+      },
+      {
+        id: 3,
+        name: "Pikachu Promo",
+        price: "$150",
+        image: "https://images.pokemontcg.io/sm115/SM115.png",
+        link: "https://cartaspokemon.pe/productos/pikachu-promo"
+      },
+    ];
+
+    const store = document.getElementById('store');
+    products.forEach(product => {
+      const card = document.createElement('div');
+      card.className = 'card';
+      card.innerHTML = `
+        <img src="${product.image}" alt="${product.name}" />
+        <h2>${product.name}</h2>
+        <p class="price">${product.price}</p>
+        <button class="btn" onclick="window.open('${product.link}', '_blank')">Comprar</button>
+      `;
+      store.appendChild(card);
+    });
+  </script>
+</body>
 </html>
